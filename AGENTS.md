@@ -1,16 +1,16 @@
-# AGENTS.md
+﻿# AGENTS.md
 
 ## Purpose
 
-This repository is for structured paper review. Use it to evaluate academic papers, extract evidence, compare methods, and produce review artifacts that can support future manuscripts in `Ramblue/writing`.
+This repository is for structured paper review. Use it to evaluate academic papers, extract evidence, compare methods, and produce review artifacts that can support future manuscripts in `donggeonbae/writing`.
 
 Related repositories:
 
-- `Ramblue/research`: shared source material, research maps, reading queues, datasets, and reusable notes.
-- `Ramblue/review`: structured paper reviews, evidence extraction, critique, and comparison.
-- `Ramblue/figure`: paper figures, diagrams, visual explanations, Figma assets, and image-generation workflows.
-- `Ramblue/writing`: LaTeX manuscript drafting, venue templates, citation integration, strict review loops, and submission preparation.
-- `Ramblue/presentation`: meeting decks, literature review decks, conference talks, posters, and speaker scripts.
+- `donggeonbae/research`: shared source material, research maps, reading queues, datasets, and reusable notes.
+- `donggeonbae/review`: structured paper reviews, evidence extraction, critique, and comparison.
+- `donggeonbae/figure`: paper figures, diagrams, visual explanations, Figma assets, and image-generation workflows.
+- `donggeonbae/writing`: LaTeX manuscript drafting, venue templates, citation integration, strict review loops, and submission preparation.
+- `donggeonbae/presentation`: meeting decks, literature review decks, conference talks, posters, and speaker scripts.
 
 ## Repository Role
 
@@ -24,14 +24,14 @@ Use this repository for:
 - reviewer-style comments
 - review summaries that can be cited by writing projects
 
-Do not use this repository as the main place for broad research maps, figure production, or manuscript drafts. Put those in `Ramblue/research`, `Ramblue/figure`, and `Ramblue/writing`.
+Do not use this repository as the main place for broad research maps, figure production, or manuscript drafts. Put those in `donggeonbae/research`, `donggeonbae/figure`, and `donggeonbae/writing`.
 
 ## Project Orientation
 
 Before reviewing a paper:
 
 1. Confirm the target paper, version, year, and source link.
-2. Check `Ramblue/research` for existing source notes.
+2. Check `donggeonbae/research` for existing source notes.
 3. Identify the review type: quick scan, detailed technical review, replication review, or comparative review.
 4. Keep author claims, evidence, critique, and your interpretation clearly separated.
 
@@ -60,8 +60,8 @@ Every substantial review should include:
 - strengths
 - limitations
 - assumptions and threats to validity
-- relevance to current Ramblue writing projects
-- links to source notes in `Ramblue/research`
+- relevance to current donggeonbae writing projects
+- links to source notes in `donggeonbae/research`
 
 ## Evidence and Citation Rules
 
@@ -88,7 +88,7 @@ diffusion-policy/2023/chi-diffusion-policy
 clinical-ai/2024/foundation-models-ehr
 ```
 
-When a review depends on source notes, link back to `Ramblue/research`. When a review suggests a figure, link forward to `Ramblue/figure`. When a review supports a manuscript, link forward to `Ramblue/writing`. When a review supports a literature review deck or talk, link forward to `Ramblue/presentation`.
+When a review depends on source notes, link back to `donggeonbae/research`. When a review suggests a figure, link forward to `donggeonbae/figure`. When a review supports a manuscript, link forward to `donggeonbae/writing`. When a review supports a literature review deck or talk, link forward to `donggeonbae/presentation`.
 
 Prefer relative links when repositories are checked out under the same parent directory:
 
@@ -118,6 +118,24 @@ Before finishing a review, verify:
 - links to `research` and `writing` are included when relevant
 - open questions are listed
 
+## Static HTML Archive Framework
+
+This repository follows the source-derived encrypted static HTML archive pattern adapted from `Lukael/research`.
+
+Framework files:
+
+- `index.html`: public archive index.
+- `styles/site.css`: shared dark archive styling.
+- `scripts/site.js`: discovers `projects/<slug>/` folders through the GitHub Contents API or local directory listing.
+- `scripts/decrypt-report.js`: unlocks `projects/<slug>/report.enc` in the browser using Web Crypto.
+- `scripts/encrypt-report.js`: encrypts plaintext HTML into `report.enc` using `REPORT_PASSWORD`.
+- `scripts/build-markdown-report.js`: builds a project unlock shell and optional encrypted report from Markdown.
+- `scripts/build-3dgs-ri-report.js`: source-derived example builder kept for reference; prefer `build-markdown-report.js` for new work.
+- `templates/unlock-template.html`: public password unlock shell.
+- `templates/report-template.html`: dark two-column encrypted report body template.
+- `projects/<slug>/`: public unlock shell plus encrypted payload for each protected report.
+
+Do not commit plaintext protected report bodies under `projects/`. Use `build/` for transient plaintext output and keep encrypted payloads in `projects/<slug>/report.enc` when a report should be published.
 ## Agent Behavior
 
 When acting as an AI review agent:
@@ -126,3 +144,6 @@ When acting as an AI review agent:
 - Be careful with uncertainty and do not overstate conclusions.
 - Prefer actionable critique over broad commentary.
 - Report what was reviewed, what evidence was extracted, and what still needs manual verification.
+
+
+

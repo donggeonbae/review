@@ -1,14 +1,14 @@
-# Cross-Repository Workflow
+﻿# Cross-Repository Workflow
 
-The Ramblue research system uses three repositories with distinct roles.
+The donggeonbae research system uses five repositories with distinct roles.
 
 ## Repositories
 
-- `Ramblue/research`: shared source material, research maps, reusable notes, and evidence.
-- `Ramblue/review`: structured paper reviews and comparative critique.
-- `Ramblue/figure`: paper figures, diagrams, visual explanations, Figma assets, and image-generation workflows.
-- `Ramblue/writing`: LaTeX manuscript drafts, venue templates, citation integration, strict review loops, and submission materials.
-- `Ramblue/presentation`: meeting decks, literature review decks, conference talks, posters, and speaker scripts.
+- `donggeonbae/research`: shared source material, research maps, reusable notes, and evidence.
+- `donggeonbae/review`: structured paper reviews and comparative critique.
+- `donggeonbae/figure`: paper figures, diagrams, visual explanations, Figma assets, and image-generation workflows.
+- `donggeonbae/writing`: LaTeX manuscript drafts, venue templates, citation integration, strict review loops, and submission materials.
+- `donggeonbae/presentation`: meeting decks, literature review decks, conference talks, posters, and speaker scripts.
 
 ## Review Flow
 
@@ -32,3 +32,5 @@ Figure: ../figure/figures/project-slug/figure-id/spec.md
 Manuscript: ../writing/manuscripts/project-slug/draft.md
 Presentation: ../presentation/literature-review/project-slug/deck.md
 ```
+
+
