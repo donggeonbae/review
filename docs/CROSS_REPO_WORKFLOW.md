@@ -13,9 +13,11 @@ The donggeonbae research system uses five repositories with distinct roles.
 ## Review Flow
 
 1. Use `research` to locate source metadata and reusable notes.
-2. Create a structured review in `review`.
-3. Extract claims, evidence, methods, limitations, and relevance.
-4. Link review outputs to figure specs in `figure`, manuscript drafts in `writing`, or literature review decks in `presentation`.
+2. Capture key figure and table snapshots from the paper when possible.
+3. Create a structured review report in `review`.
+4. Connect prior work, limitations, method, results, and implications in the paper's logical flow.
+5. Build the review into an HTML report through the encrypted archive framework.
+6. Link review outputs to figure specs in `figure`, manuscript drafts in `writing`, or literature review decks in `presentation`.
 
 ## Shared ID Format
 
@@ -31,6 +33,17 @@ Review: ../review/reviews/topic-slug/source-slug.md
 Figure: ../figure/figures/project-slug/figure-id/spec.md
 Manuscript: ../writing/manuscripts/project-slug/draft.md
 Presentation: ../presentation/literature-review/project-slug/deck.md
+```
+
+## Review Artifact Flow
+
+```text
+research source note
+  -> review figure snapshots
+  -> review Markdown report
+  -> encrypted HTML report
+  -> presentation handoff
+  -> PPTX deck and speaker script
 ```
 
 
