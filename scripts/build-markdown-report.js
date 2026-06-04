@@ -26,6 +26,7 @@ function usage() {
     '  --method <text>      Method/system shown in metadata',
     '  --metric <text>      Primary metric shown in metadata',
     '  --hero <path>        Optional local hero image embedded as base64',
+    '  --public-title <text> Public unlock-shell title; defaults to --title',
     '',
     'If REPORT_PASSWORD is set, the script writes projects/<slug>/report.enc.',
     'A transient plaintext build is always written under build/<slug>/report.html.',
@@ -87,6 +88,23 @@ function inlineMarkdown(value) {
   out = out.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
 
   return out;
+}
+
+function inlineMarkdownWithImages(value, sourceRoot) {
+  const imagePattern = /!\[([^\]]*)\]\(([^)]+)\)/g;
+  const parts = [];
+  let lastIndex = 0;
+  let match;
+
+  while ((match = imagePattern.exec(value))) {
+    parts.push(inlineMarkdown(value.slice(lastIndex, match.index)));
+    parts.push(renderImage(match[2], sourceRoot));
+    lastIndex = imagePattern.lastIndex;
+  }
+
+  parts.push(inlineMarkdown(value.slice(lastIndex)));
+
+  return parts.join('');
 }
 
 function readImage(src, sourceRoot) {
@@ -154,7 +172,7 @@ function renderMarkdown(markdown, sourceRoot) {
 
   function flushParagraph() {
     if (!paragraph.length) return;
-    html.push(`<p>${inlineMarkdown(paragraph.join(' ')).replace(/!\[[^\]]*\]\(([^)]+)\)/g, (_, src) => renderImage(src, sourceRoot))}</p>`);
+    html.push(`<p>${inlineMarkdownWithImages(paragraph.join(' '), sourceRoot)}</p>`);
     paragraph = [];
   }
 
@@ -345,7 +363,7 @@ function main() {
 
   fs.mkdirSync(projectRoot, { recursive: true });
   fs.mkdirSync(buildRoot, { recursive: true });
-  fs.writeFileSync(path.join(projectRoot, 'index.html'), buildUnlockShell(options.title));
+  fs.writeFileSync(path.join(projectRoot, 'index.html'), buildUnlockShell(options['public-title'] || options.title));
   fs.writeFileSync(buildHtml, reportHtml);
 
   if (process.env.REPORT_PASSWORD) {

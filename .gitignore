@@ -5,3 +5,5 @@ Thumbs.db
 !.env.example
 build/
 .cache/
+.work/
+image-contact-sheet.jpg
