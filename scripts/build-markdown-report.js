@@ -292,8 +292,10 @@ function readTemplate(name) {
   return fs.readFileSync(path.join(repoRoot, 'templates', name), 'utf8');
 }
 
-function buildUnlockShell(title) {
-  return readTemplate('unlock-template.html').replaceAll('{{PROJECT_TITLE}}', title);
+function buildUnlockShell(title, payloadVersion) {
+  return readTemplate('unlock-template.html')
+    .replaceAll('{{PROJECT_TITLE}}', title)
+    .replace('data-payload="report.enc"', `data-payload="report.enc?v=${encodeURIComponent(payloadVersion)}"`);
 }
 
 function buildReportHtml(markdown, options) {
@@ -360,10 +362,11 @@ function main() {
   const buildHtml = path.join(buildRoot, 'report.html');
   const reportEnc = path.join(projectRoot, 'report.enc');
   const reportHtml = buildReportHtml(fs.readFileSync(input, 'utf8'), options);
+  const payloadVersion = options['payload-version'] || String(Date.now());
 
   fs.mkdirSync(projectRoot, { recursive: true });
   fs.mkdirSync(buildRoot, { recursive: true });
-  fs.writeFileSync(path.join(projectRoot, 'index.html'), buildUnlockShell(options['public-title'] || options.title));
+  fs.writeFileSync(path.join(projectRoot, 'index.html'), buildUnlockShell(options['public-title'] || options.title, payloadVersion));
   fs.writeFileSync(buildHtml, reportHtml);
 
   if (process.env.REPORT_PASSWORD) {

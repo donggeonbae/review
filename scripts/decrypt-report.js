@@ -128,7 +128,7 @@
     setStatus("Decrypting report.");
     button.disabled = true;
 
-    fetch(payloadPath)
+    fetch(payloadPath, { cache: "no-store" })
       .then(function (response) {
         if (!response.ok) {
           throw new Error("payload");
